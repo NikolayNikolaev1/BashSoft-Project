@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BashSoft
@@ -22,18 +23,25 @@ namespace BashSoft
                     break;
                 }
 
-                foreach (var directoryPath in Directory.GetDirectories(currentPath))
+                try
                 {
-                    subFolders.Enqueue(directoryPath);
+                    foreach (var directoryPath in Directory.GetDirectories(currentPath))
+                    {
+                        subFolders.Enqueue(directoryPath);
+                    }
+
+                    OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', identation), currentPath));
+
+                    foreach (var file in Directory.GetFiles(currentPath))
+                    {
+                        int indexOfLastSlash = file.LastIndexOf("\\");
+                        string fileName = file.Substring(indexOfLastSlash);
+                        OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSlash) + fileName);
+                    }
                 }
-
-                OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', identation), currentPath));
-
-                foreach (var file in Directory.GetFiles(currentPath))
+                catch (UnauthorizedAccessException)
                 {
-                    int indexOfLastSlash = file.LastIndexOf("\\");
-                    string fileName = file.Substring(indexOfLastSlash);
-                    OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSlash) + fileName);
+                    OutputWriter.WriteMessageOnNewLine(ExceptionMessages.UnauthorizedExceptionMessage);
                 }
             }
         }
@@ -41,17 +49,32 @@ namespace BashSoft
         public static void CreateDirectoryInCurrentFolder(string name)
         {
             string path = SessionData.currentPath + "\\" + name;
-            Directory.CreateDirectory(path);
+
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (ArgumentException)
+            {
+                OutputWriter.DisplayException(ExceptionMessages.ForbiddenSymbolsContainedInName);
+            }
         }
 
         public static void ChangeCurrentDirectoryRelative(string relativePath)
         {
             if (relativePath == "..")
             {
-                string currentPath = SessionData.currentPath;
-                int indexOfLastSlash = currentPath.LastIndexOf("\\");
-                string newPath = currentPath.Substring(0, indexOfLastSlash);
-                SessionData.currentPath = newPath;
+                try
+                {
+                    string currentPath = SessionData.currentPath;
+                    int indexOfLastSlash = currentPath.LastIndexOf("\\");
+                    string newPath = currentPath.Substring(0, indexOfLastSlash);
+                    SessionData.currentPath = newPath;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    OutputWriter.DisplayException(ExceptionMessages.UnableToGoHigherInParitionHierarchy);
+                }
             }
             else
             {
