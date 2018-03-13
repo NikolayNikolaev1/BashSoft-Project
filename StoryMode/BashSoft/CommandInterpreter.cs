@@ -1,4 +1,6 @@
-﻿namespace BashSoft
+﻿using System.Diagnostics;
+
+namespace BashSoft
 {
     public static class CommandInterpreter
     {
@@ -279,5 +281,4 @@
             OutputWriter.WriteMessageOnNewLine($"The command {input} is invalid!");
         }
     }
-}
 }

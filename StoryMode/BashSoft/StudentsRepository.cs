@@ -35,7 +35,7 @@ namespace BashSoft
             }
         }
 
-        public static void InitializeData(string fileName)
+        public static void InitilizeData(string fileName)
         {
             if (!isDataInitialized)
             {
@@ -45,7 +45,7 @@ namespace BashSoft
             }
             else
             {
-                OutputWriter.DisplayException(ExceptionMessages.DataAlreadyInitialisedException);
+                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataAlreadyInitialisedException);
             }
         }
 
