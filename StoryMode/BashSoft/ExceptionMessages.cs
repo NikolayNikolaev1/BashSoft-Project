@@ -20,6 +20,8 @@
 
         public const string InvalidPath = "The folder/file you are trying to access at the current address, does not exist.";
 
+        public const string InvalidQueryComparison = "The comparison query you want, does not exist in the context of the current program!";
+
         public const string UnableToGoHigherInParitionHierarchy = "Unable to go higher in partition hierarchy.";
 
         public const string UnableToParseNumber = "The sequence you've written is not a valid number.";
