@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
@@ -8,13 +9,13 @@ namespace BashSoft
         public static bool isDataInitialized = false;
         private static Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
 
-        public static void InitializeData()
+        public static void InitializeData(string fileName)
         {
             if (!isDataInitialized)
             {
                 OutputWriter.WriteMessageOnNewLine("Reading data...");
                 studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
-                ReadData();
+                ReadData(fileName);
             }
             else
             {
@@ -22,29 +23,44 @@ namespace BashSoft
             }
         }
 
-        private static void ReadData()
+        private static void ReadData(string fileName)
         {
-            string input = Console.ReadLine();
-
-            while (!string.IsNullOrEmpty(input))
+            string path = SessionData.currentPath + "\\" + fileName;
+            if (File.Exists(path))
             {
-                string[] tokens = input.Split();
-                string course = tokens[0];
-                string student = tokens[1];
-                int mark = int.Parse(tokens[2]);
-
-                if (!studentsByCourse.ContainsKey(course))
+                var rgx = new Regex(@"([A-Z][A-Za-z+#]*_[A-Z][a-z]{2}_201[4-9])\s+([A-Z][a-z]{0,3}\d{2}_\d{2,4})\s+(\d{1,3})");
+                var allInputLines = File.ReadAllLines(path);
+                for (int i = 0; i < allInputLines.Length; i++)
                 {
-                    studentsByCourse.Add(course, new Dictionary<string, List<int>>());
-                }
+                    if (!string.IsNullOrEmpty(allInputLines[i]) && rgx.IsMatch(allInputLines[i]))
+                    {
+                        var currentMatch = rgx.Match(allInputLines[i]);
+                        var course = currentMatch.Groups[1].Value;
+                        var student = currentMatch.Groups[2].Value;
+                        int score;
+                        var hasParsed = int.TryParse(currentMatch.Groups[3].Value, out score);
 
-                if (!studentsByCourse[course].ContainsKey(student))
-                {
-                    studentsByCourse[course].Add(student, new List<int>());
-                }
+                        if (hasParsed && score <= 100 && score >= 0)
+                        {
+                            if (!studentsByCourse.ContainsKey(course))
+                            {
+                                studentsByCourse.Add(course, new Dictionary<string, List<int>>());
+                            }
 
-                studentsByCourse[course][student].Add(mark);
-                input = Console.ReadLine();
+                            if (!studentsByCourse[course].ContainsKey(student))
+                            {
+                                studentsByCourse[course].Add(student, new List<int>());
+                            }
+
+                            studentsByCourse[course][student].Add(score);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidPath);
+                return;
             }
 
             isDataInitialized = true;
