@@ -6,7 +6,12 @@ namespace BashSoft
     {
         static void Main(string[] args)
         {
-            IOManager.TraverseDirectory(@"C:\Users\user\Source\Repos");
+            //IOManager.TraverseDirectory(@"C:\Users\user\Source\Repos");
+
+            StudentsRepository.InitializeData();
+            StudentsRepository.GetAllStudentsFromCourse("Unity");
+            OutputWriter.WriteEmptyLine();
+            StudentsRepository.GetStudentScoresFromCourse("Unity", "Ivan");
         }
     }
 }

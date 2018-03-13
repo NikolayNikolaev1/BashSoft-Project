@@ -6,14 +6,14 @@ namespace BashSoft
     public static class StudentsRepository
     {
         public static bool isDataInitialized = false;
-        private static Dictionary<string, Dictionary<string, List<int>>> studentByCourse;
+        private static Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
 
         public static void InitializeData()
         {
             if (!isDataInitialized)
             {
                 OutputWriter.WriteMessageOnNewLine("Reading data...");
-                studentByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
+                studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
                 ReadData();
             }
             else
@@ -33,17 +33,17 @@ namespace BashSoft
                 string student = tokens[1];
                 int mark = int.Parse(tokens[2]);
 
-                if (!studentByCourse.ContainsKey(course))
+                if (!studentsByCourse.ContainsKey(course))
                 {
-                    studentByCourse.Add(course, new Dictionary<string, List<int>>());
+                    studentsByCourse.Add(course, new Dictionary<string, List<int>>());
                 }
 
-                if (!studentByCourse[course].ContainsKey(student))
+                if (!studentsByCourse[course].ContainsKey(student))
                 {
-                    studentByCourse[course].Add(student, new List<int>());
+                    studentsByCourse[course].Add(student, new List<int>());
                 }
 
-                studentByCourse[course][student].Add(mark);
+                studentsByCourse[course][student].Add(mark);
                 input = Console.ReadLine();
             }
 
@@ -55,7 +55,7 @@ namespace BashSoft
         {
             if (isDataInitialized)
             {
-                if (studentByCourse.ContainsKey(courseName))
+                if (studentsByCourse.ContainsKey(courseName))
                 {
                     return true;
                 }
@@ -75,7 +75,7 @@ namespace BashSoft
         private static bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
             if (IsQueryForCoursePossible(courseName) 
-                && studentByCourse[courseName].ContainsKey(studentUserName))
+                && studentsByCourse[courseName].ContainsKey(studentUserName))
             {
                 return true;
             }
@@ -85,6 +85,27 @@ namespace BashSoft
             }
 
             return false;
+        }
+
+        public static void GetStudentScoresFromCourse(string courseName, string username)
+        {
+            if (IsQueryForStudentPossible(courseName, username))
+            {
+                OutputWriter.PrintStudent(new KeyValuePair<string, List<int>>(username, studentsByCourse[courseName][username]));
+            }
+        }
+
+        public static void GetAllStudentsFromCourse(string courseName)
+        {
+            if (IsQueryForCoursePossible(courseName))
+            {
+                OutputWriter.WriteMessageOnNewLine($"{courseName}:");
+
+                foreach (var studentMarksEntry in studentsByCourse[courseName])
+                {
+                    OutputWriter.PrintStudent(studentMarksEntry);
+                }
+            }
         }
     }
 }
