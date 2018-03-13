@@ -14,13 +14,15 @@
 
         public const string InexistingStudentInDataBase = "The user name for the student you are trying to get does not exist!";
 
+        public const string InvalidStudentFilter ="The given filter is not one of the following: excellent/average/poor";
+
         public const string InvalidTakeQueryParamter = "The take command expected does not match the format wanted!";
 
         public const string InvalidPath = "The folder/file you are trying to access at the current address, does not exist.";
 
         public const string UnableToGoHigherInParitionHierarchy = "Unable to go higher in partition hierarchy.";
 
-        public static string UnableToParseNumber = "The sequence you've written is not a valid number.";
+        public const string UnableToParseNumber = "The sequence you've written is not a valid number.";
 
         public const string UnauthorizedExceptionMessage = "The folder/file you are trying to get access needs a higher level of rights than you currently have.";
     }
