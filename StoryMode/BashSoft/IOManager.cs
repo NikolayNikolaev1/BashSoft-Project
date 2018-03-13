@@ -5,7 +5,7 @@ namespace BashSoft
 {
     public static class IOManager
     {
-        public static void TraverseDirectory(string path)
+        public static void TraverseDirectory(int depth)
         {
             OutputWriter.WriteEmptyLine();
             int initialIdentation = SessionData.currentPath.Split('\\').Length;
@@ -42,6 +42,34 @@ namespace BashSoft
         {
             string path = SessionData.currentPath + "\\" + name;
             Directory.CreateDirectory(path);
+        }
+
+        public static void ChangeCurrentDirectoryRelative(string relativePath)
+        {
+            if (relativePath == "..")
+            {
+                string currentPath = SessionData.currentPath;
+                int indexOfLastSlash = currentPath.LastIndexOf("\\");
+                string newPath = currentPath.Substring(0, indexOfLastSlash);
+                SessionData.currentPath = newPath;
+            }
+            else
+            {
+                string currentPath = SessionData.currentPath;
+                currentPath += "\\" + relativePath;
+                ChangeCurrentDirectoryRelative(currentPath);
+            }
+        }
+
+        public static void ChangeCurrentDirectoryAbsolute(string absolutePath)
+        {
+            if (!Directory.Exists(absolutePath))
+            {
+                OutputWriter.DisplayException(ExceptionMessages.InvalidPath);
+                return;
+            }
+
+            SessionData.currentPath = absolutePath;
         }
     }
 }

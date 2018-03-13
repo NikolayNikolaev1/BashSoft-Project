@@ -72,6 +72,8 @@ namespace BashSoft
                 File.WriteAllLines(mismatchPath, mismatches);
                 return;
             }
+
+            OutputWriter.WriteMessageOnNewLine("Files are identical. There are no mismatches.");
         }
     }
 }
