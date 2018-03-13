@@ -1,1 +1,1 @@
-Redoing a Project from the SoftUni Model - C# Fundamentals as an exercise.
+A REDO of a Project from the SoftUni Model - C# Fundamentals as an exercise.
