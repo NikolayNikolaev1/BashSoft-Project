@@ -1,0 +1,11 @@
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\bin\Debug\netcoreapp2.0\BashSoft.deps.json
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\bin\Debug\netcoreapp2.0\BashSoft.runtimeconfig.json
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\bin\Debug\netcoreapp2.0\BashSoft.runtimeconfig.dev.json
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\bin\Debug\netcoreapp2.0\BashSoft.dll
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\bin\Debug\netcoreapp2.0\BashSoft.pdb
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.csprojResolveAssemblyReference.cache
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.AssemblyInfoInputs.cache
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.AssemblyInfo.cs
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.dll
+C:\Users\user\Source\Repos\BashSoft-Project\StoryMode\BashSoft\obj\Debug\netcoreapp2.0\BashSoft.pdb

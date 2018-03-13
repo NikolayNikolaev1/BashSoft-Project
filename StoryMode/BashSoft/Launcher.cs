@@ -6,7 +6,7 @@ namespace BashSoft
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IOManager.TraverseDirectory(@"C:\Users\user\Source\Repos");
         }
     }
 }
