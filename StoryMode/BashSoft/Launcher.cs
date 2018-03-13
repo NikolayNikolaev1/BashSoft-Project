@@ -11,7 +11,9 @@
             //OutputWriter.WriteEmptyLine();
             //StudentsRepository.GetStudentScoresFromCourse("Unity", "Ivan");
 
-            Tester.CompareContent(@"C:\Users\user\Desktop\Нова папка (4)\BashSoft-FirstWeek\test2.txt", @"C:\Users\user\Desktop\Нова папка (4)\BashSoft-FirstWeek\test3.txt");
+            //Tester.CompareContent(@"C:\Users\user\Desktop\Нова папка (4)\BashSoft-FirstWeek\test2.txt", @"C:\Users\user\Desktop\Нова папка (4)\BashSoft-FirstWeek\test3.txt");
+
+            //IOManager.CreateDirectoryInCurrentFolder("pesho");
         }
     }
 }
