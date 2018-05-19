@@ -4,52 +4,70 @@ using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
-    public static class StudentsRepository
+    public class StudentsRepository
     {
-        public static bool isDataInitialized = false;
-        private static Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
+        public bool isDataInitialized = false;
+        private Dictionary<string, Dictionary<string, List<int>>> studentByCourse;
+        private RepositoryFilter filter;
+        private RepositorySorter sorter;
 
-        public static void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
+        public StudentsRepository(RepositorySorter sorter, RepositoryFilter filter)
+        {
+            this.filter = filter;
+            this.sorter = sorter;
+            this.studentByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
+        }
+
+        public void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = studentsByCourse[courseName].Count;
+                    studentsToTake = studentByCourse[courseName].Count;
                 }
 
-                RepositoryFilters.FilterAndTake(studentsByCourse[courseName], givenFilter, studentsToTake.Value);
+                this.filter.FilterAndTake(studentByCourse[courseName], givenFilter, studentsToTake.Value);
             }
         }
 
-        public static void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
+        public void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = studentsByCourse[courseName].Count;
+                    studentsToTake = studentByCourse[courseName].Count;
                 }
 
-                RepositorySorters.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
+                this.sorter.OrderAndTake(studentByCourse[courseName], comparison, studentsToTake.Value);
             }
         }
 
-        public static void InitilizeData(string fileName)
+        public void LoadData(string fileName)
         {
-            if (!isDataInitialized)
+            if (this.isDataInitialized)
             {
-                OutputWriter.WriteMessageOnNewLine("Reading data...");
-                studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
-                ReadData(fileName);
+                OutputWriter.DisplayException(ExceptionMessages.DataAlreadyInitialisedException);
+                return;
             }
-            else
-            {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataAlreadyInitialisedException);
-            }
+
+            OutputWriter.WriteMessageOnNewLine("Reading data...");
+            ReadData(fileName);
         }
 
-        private static void ReadData(string fileName)
+        public void UnloadData()
+        {
+            if (!this.isDataInitialized)
+            {
+                OutputWriter.DisplayException(ExceptionMessages.DataNotInitializedExceptionMessage);
+            }
+
+            this.studentByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
+            this.isDataInitialized = false;
+        }
+
+        private void ReadData(string fileName)
         {
             string path = SessionData.currentPath + "\\" + fileName;
             if (File.Exists(path))
@@ -68,17 +86,17 @@ namespace BashSoft
 
                         if (hasParsed && score <= 100 && score >= 0)
                         {
-                            if (!studentsByCourse.ContainsKey(course))
+                            if (!studentByCourse.ContainsKey(course))
                             {
-                                studentsByCourse.Add(course, new Dictionary<string, List<int>>());
+                                studentByCourse.Add(course, new Dictionary<string, List<int>>());
                             }
 
-                            if (!studentsByCourse[course].ContainsKey(student))
+                            if (!studentByCourse[course].ContainsKey(student))
                             {
-                                studentsByCourse[course].Add(student, new List<int>());
+                                studentByCourse[course].Add(student, new List<int>());
                             }
 
-                            studentsByCourse[course][student].Add(score);
+                            studentByCourse[course][student].Add(score);
                         }
                     }
                 }
@@ -93,11 +111,11 @@ namespace BashSoft
             OutputWriter.WriteMessageOnNewLine("Data read!");
         }
 
-        private static bool IsQueryForCoursePossible(string courseName)
+        private bool IsQueryForCoursePossible(string courseName)
         {
             if (isDataInitialized)
             {
-                if (studentsByCourse.ContainsKey(courseName))
+                if (studentByCourse.ContainsKey(courseName))
                 {
                     return true;
                 }
@@ -114,10 +132,10 @@ namespace BashSoft
             return false;
         }
 
-        private static bool IsQueryForStudentPossible(string courseName, string studentUserName)
+        private bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
             if (IsQueryForCoursePossible(courseName) 
-                && studentsByCourse[courseName].ContainsKey(studentUserName))
+                && studentByCourse[courseName].ContainsKey(studentUserName))
             {
                 return true;
             }
@@ -129,21 +147,21 @@ namespace BashSoft
             return false;
         }
 
-        public static void GetStudentScoresFromCourse(string courseName, string username)
+        public void GetStudentScoresFromCourse(string courseName, string username)
         {
             if (IsQueryForStudentPossible(courseName, username))
             {
-                OutputWriter.PrintStudent(new KeyValuePair<string, List<int>>(username, studentsByCourse[courseName][username]));
+                OutputWriter.PrintStudent(new KeyValuePair<string, List<int>>(username, studentByCourse[courseName][username]));
             }
         }
 
-        public static void GetAllStudentsFromCourse(string courseName)
+        public void GetAllStudentsFromCourse(string courseName)
         {
             if (IsQueryForCoursePossible(courseName))
             {
                 OutputWriter.WriteMessageOnNewLine($"{courseName}:");
 
-                foreach (var studentMarksEntry in studentsByCourse[courseName])
+                foreach (var studentMarksEntry in studentByCourse[courseName])
                 {
                     OutputWriter.PrintStudent(studentMarksEntry);
                 }

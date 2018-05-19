@@ -188,7 +188,7 @@ namespace BashSoft
             }
 
             var databasePath = data[1];
-            StudentsRepository.InitilizeData(databasePath);
+            StudentsRepository.LoadData(databasePath);
         }
 
         private static void TryChangePathRelatively(string input, string[] data)
