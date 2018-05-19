@@ -16,6 +16,8 @@
 
         public const string InvalidNumberOfScores = "The number of scores for the given course is greater than the possible.";
 
+        public const string InvalidScore = "The number for the score you've entered is not in the range of 0 - 100.";
+
         public const string InvalidStudentFilter ="The given filter is not one of the following: excellent/average/poor";
 
         public const string InvalidTakeQueryParamter = "The take command expected does not match the format wanted!";

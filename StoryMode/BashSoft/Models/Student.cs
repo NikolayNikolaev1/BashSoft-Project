@@ -29,7 +29,7 @@ namespace BashSoft.Models
             this.enrolledCourses.Add(course.name, course);
         }
 
-        public void SetMarksInCourse(string courseName, params int[] scores)
+        public void SetMarkOnCourse(string courseName, params int[] scores)
         {
             if (!this.enrolledCourses.ContainsKey(courseName))
             {
