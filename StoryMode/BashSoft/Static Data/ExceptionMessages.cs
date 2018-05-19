@@ -14,6 +14,8 @@
 
         public const string InexistingStudentInDataBase = "The user name for the student you are trying to get does not exist!";
 
+        public const string InvalidNumberOfScores = "The number of scores for the given course is greater than the possible.";
+
         public const string InvalidStudentFilter ="The given filter is not one of the following: excellent/average/poor";
 
         public const string InvalidTakeQueryParamter = "The take command expected does not match the format wanted!";
@@ -21,6 +23,10 @@
         public const string InvalidPath = "The folder/file you are trying to access at the current address, does not exist.";
 
         public const string InvalidQueryComparison = "The comparison query you want, does not exist in the context of the current program!";
+
+        public const string NotEnrolledInCourse = "Student must be enrolled in a course before you set his mark.";
+
+        public const string StudentAlreadyEnrolledInGivenCourse = "The {0} already exists in {1}.";
 
         public const string UnableToGoHigherInParitionHierarchy = "Unable to go higher in partition hierarchy.";
 
