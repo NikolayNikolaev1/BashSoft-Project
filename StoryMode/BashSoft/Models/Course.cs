@@ -5,7 +5,7 @@ namespace BashSoft.Models
     public class Course
     {
         public const int NumberOfTasksOnExam = 5;
-        public const int MaxScoreOnExamTasks = 100;
+        public const int MaxScoreOnExamTask = 100;
 
         public string name;
         public Dictionary<string, Student> studentsByName;
