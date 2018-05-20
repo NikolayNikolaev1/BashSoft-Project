@@ -49,15 +49,15 @@ namespace BashSoft.Models
 
         public void EnrollInCourse(Course course)
         {
-            if (this.enrolledCourses.ContainsKey(course.name))
+            if (this.enrolledCourses.ContainsKey(course.Name))
             {
                 OutputWriter.DisplayException(string.Format(
                     ExceptionMessages.StudentAlreadyEnrolledInGivenCourse,
-                    this.userName, course.name));
+                    this.userName, course.Name));
                 return;
             }
 
-            this.enrolledCourses.Add(course.name, course);
+            this.enrolledCourses.Add(course.Name, course);
         }
 
         public void SetMarkOnCourse(string courseName, params int[] scores)

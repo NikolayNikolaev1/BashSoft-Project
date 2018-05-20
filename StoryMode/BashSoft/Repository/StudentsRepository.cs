@@ -30,10 +30,10 @@ namespace BashSoft
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = this.courses[courseName].studentsByName.Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
 
-                var marks = this.courses[courseName].studentsByName
+                var marks = this.courses[courseName].StudentsByName
                     .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.filter.FilterAndTake(marks, givenFilter, studentsToTake.Value);
             }
@@ -45,10 +45,10 @@ namespace BashSoft
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = this.courses[courseName].studentsByName.Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
 
-                var marks = this.courses[courseName].studentsByName
+                var marks = this.courses[courseName].StudentsByName
                     .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
@@ -85,7 +85,7 @@ namespace BashSoft
             {
                 OutputWriter.PrintStudent(
                     new KeyValuePair<string, double>(
-                        username, this.courses[courseName].studentsByName[username].MarksByCourseName[courseName]));
+                        username, this.courses[courseName].StudentsByName[username].MarksByCourseName[courseName]));
             }
         }
 
@@ -95,7 +95,7 @@ namespace BashSoft
             {
                 OutputWriter.WriteMessageOnNewLine($"{courseName}:");
 
-                foreach (var studentMarksEntry in this.courses[courseName].studentsByName)
+                foreach (var studentMarksEntry in this.courses[courseName].StudentsByName)
                 {
                     this.GetStudentScoresFromCourse(courseName, studentMarksEntry.Key);
                 }
@@ -194,7 +194,7 @@ namespace BashSoft
 
         private bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
-            if (this.IsQueryForCoursePossible(courseName) && this.courses[courseName].studentsByName.ContainsKey(studentUserName))
+            if (this.IsQueryForCoursePossible(courseName) && this.courses[courseName].StudentsByName.ContainsKey(studentUserName))
             {
                 return true;
             }
