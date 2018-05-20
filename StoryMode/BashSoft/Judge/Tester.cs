@@ -7,10 +7,10 @@ namespace BashSoft
     {
         public void CompareContent(string userOutputPath, string expectedOutputPath)
         {
-            OutputWriter.WriteMessageOnNewLine("Reading files...");
-
             try
             {
+                OutputWriter.WriteMessageOnNewLine("Reading files...");
+
                 string mismatchPath = GetMismatchPath(expectedOutputPath);
 
                 string[] actualOutputLines = File.ReadAllLines(userOutputPath);
@@ -22,9 +22,9 @@ namespace BashSoft
                 PrintOutput(mismatches, hasMismatch, mismatchPath);
                 OutputWriter.WriteMessageOnNewLine("Files read!");
             }
-            catch (FileNotFoundException)
+            catch (IOException)
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidPath);
+                throw new IOException(ExceptionMessages.InvalidPath);
             }
         }
 

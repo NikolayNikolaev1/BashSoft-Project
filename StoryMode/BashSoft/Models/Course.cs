@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BashSoft.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace BashSoft.Models
@@ -44,10 +45,9 @@ namespace BashSoft.Models
         {
             if (this.studentsByName.ContainsKey(student.UserName))
             {
-                OutputWriter.DisplayException(string.Format(
+                throw new DuplicateEntryInStructureException(string.Format(
                     ExceptionMessages.StudentAlreadyEnrolledInGivenCourse,
                     student.UserName, this.name));
-                return;
             }
 
             this.studentsByName.Add(student.UserName, student);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BashSoft.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,10 +52,9 @@ namespace BashSoft.Models
         {
             if (this.enrolledCourses.ContainsKey(course.Name))
             {
-                OutputWriter.DisplayException(string.Format(
+                throw new DuplicateEntryInStructureException(string.Format(
                     ExceptionMessages.StudentAlreadyEnrolledInGivenCourse,
                     this.userName, course.Name));
-                return;
             }
 
             this.enrolledCourses.Add(course.Name, course);
@@ -64,14 +64,12 @@ namespace BashSoft.Models
         {
             if (!this.enrolledCourses.ContainsKey(courseName))
             {
-                OutputWriter.DisplayException(ExceptionMessages.NotEnrolledInCourse);
-                return;
+                throw new CourseNotFoundException(ExceptionMessages.NotEnrolledInCourse);
             }
 
             if (scores.Length > Course.NumberOfTasksOnExam)
             {
-                OutputWriter.DisplayException(ExceptionMessages.InvalidNumberOfScores);
-                return;
+                throw new ArgumentOutOfRangeException(ExceptionMessages.InvalidNumberOfScores);
             }
 
             this.marksByCourseName.Add(courseName, CalculateMark(scores));
