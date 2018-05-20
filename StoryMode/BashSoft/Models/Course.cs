@@ -18,15 +18,15 @@ namespace BashSoft.Models
 
         public void EnrollStudent(Student student)
         {
-            if (this.studentsByName.ContainsKey(student.userName))
+            if (this.studentsByName.ContainsKey(student.UserName))
             {
                 OutputWriter.DisplayException(string.Format(
                     ExceptionMessages.StudentAlreadyEnrolledInGivenCourse,
-                    student.userName, this.name));
+                    student.UserName, this.name));
                 return;
             }
 
-            this.studentsByName.Add(student.userName, student);
+            this.studentsByName.Add(student.UserName, student);
         }
     }
 }

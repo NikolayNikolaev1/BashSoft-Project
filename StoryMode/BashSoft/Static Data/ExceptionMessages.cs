@@ -28,6 +28,8 @@
 
         public const string NotEnrolledInCourse = "Student must be enrolled in a course before you set his mark.";
 
+        public const string NullOrEmptyValue = "The value of the variable CANNOT be null or empty!";
+
         public const string StudentAlreadyEnrolledInGivenCourse = "The {0} already exists in {1}.";
 
         public const string UnableToGoHigherInParitionHierarchy = "Unable to go higher in partition hierarchy.";

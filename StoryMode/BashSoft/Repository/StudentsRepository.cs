@@ -34,7 +34,7 @@ namespace BashSoft
                 }
 
                 var marks = this.courses[courseName].studentsByName
-                    .ToDictionary(x => x.Key, x => x.Value.marksByCourseName[courseName]);
+                    .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.filter.FilterAndTake(marks, givenFilter, studentsToTake.Value);
             }
         }
@@ -49,7 +49,7 @@ namespace BashSoft
                 }
 
                 var marks = this.courses[courseName].studentsByName
-                    .ToDictionary(x => x.Key, x => x.Value.marksByCourseName[courseName]);
+                    .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
         }
@@ -85,7 +85,7 @@ namespace BashSoft
             {
                 OutputWriter.PrintStudent(
                     new KeyValuePair<string, double>(
-                        username, this.courses[courseName].studentsByName[username].marksByCourseName[courseName]));
+                        username, this.courses[courseName].studentsByName[username].MarksByCourseName[courseName]));
             }
         }
 

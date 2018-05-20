@@ -1,19 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BashSoft.Models
 {
     public class Student
     {
-        public string userName;
-        public Dictionary<string, Course> enrolledCourses;
-        public Dictionary<string, double> marksByCourseName;
+        private string userName;
+        private Dictionary<string, Course> enrolledCourses;
+        private Dictionary<string, double> marksByCourseName;
 
         public Student(string userName)
         {
-            this.userName = userName;
+            this.UserName = userName;
             this.enrolledCourses = new Dictionary<string, Course>();
             this.marksByCourseName = new Dictionary<string, double>();
+        }
+
+        public string UserName {
+            get
+            {
+                return this.userName;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException(nameof(this.userName), ExceptionMessages.NullOrEmptyValue);
+                }
+
+                this.userName = value;
+            }
+        }
+
+        public IReadOnlyDictionary<string, Course> EnrolledCourses {
+            get
+            {
+                return this.enrolledCourses;
+            }
+        }
+
+        public IReadOnlyDictionary<string, double> MarksByCourseName {
+            get
+            {
+                return this.marksByCourseName;
+            }
         }
 
         public void EnrollInCourse(Course course)
