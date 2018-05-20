@@ -58,8 +58,7 @@ namespace BashSoft
         {
             if (this.isDataInitialized)
             {
-                OutputWriter.DisplayException(ExceptionMessages.DataAlreadyInitialisedException);
-                return;
+                throw new ArgumentException(ExceptionMessages.DataAlreadyInitialisedException);
             }
 
             this.students = new Dictionary<string, Student>();
@@ -71,7 +70,7 @@ namespace BashSoft
         {
             if (!this.isDataInitialized)
             {
-                OutputWriter.DisplayException(ExceptionMessages.DataNotInitializedExceptionMessage);
+                throw new ArgumentException(ExceptionMessages.DataNotInitializedExceptionMessage);
             }
 
             this.students = null;

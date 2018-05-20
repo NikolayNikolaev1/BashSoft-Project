@@ -22,7 +22,7 @@ namespace BashSoft
             }
             else
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidStudentFilter);
+                throw new ArgumentException(ExceptionMessages.InvalidStudentFilter);
             }
         }
 
