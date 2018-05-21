@@ -6,8 +6,8 @@ namespace BashSoft.Exceptions
     {
         private const string DuplicateEntry = "The {0} already exists in {1}.";
 
-        public DuplicateEntryInStructureException(string entry, string course) 
-            : base(string.Format(DuplicateEntry, entry, course))
+        public DuplicateEntryInStructureException(string entry, string structure) 
+            : base(string.Format(DuplicateEntry, entry, structure))
         {
         }
 
