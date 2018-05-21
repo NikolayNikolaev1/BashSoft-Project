@@ -237,27 +237,6 @@ namespace BashSoft
             }
         }
 
-        private void TryTraverseFolders(string input, string[] data)
-        {
-            if (data.Length < 2)
-            {
-                this.inputOutputManager.TraverseDirectory(0);
-            }
-            else
-            {
-                int depth;
-                bool success = int.TryParse(data[1], out depth);
-                if (success)
-                {
-                    this.inputOutputManager.TraverseDirectory(depth);
-                }
-                else
-                {
-                    OutputWriter.WriteMessageOnNewLine(ExceptionMessages.UnableToParseNumber);
-                }
-            }
-        }
-
         private void TryDropDb(string input, string[] data)
         {
             if (data.Length != 1)
