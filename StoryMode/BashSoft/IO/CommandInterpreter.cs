@@ -225,18 +225,6 @@ namespace BashSoft
             }
         }
 
-        private void TryCompareFiles(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                this.judge.CompareContent(data[1], data[2]);
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
         private void TryDropDb(string input, string[] data)
         {
             if (data.Length != 1)
