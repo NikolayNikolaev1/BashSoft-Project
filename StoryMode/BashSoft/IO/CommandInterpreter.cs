@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BashSoft.Exceptions;
+using BashSoft.IO.Commands;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -20,80 +22,55 @@ namespace BashSoft
         public void InterpredCommand(string input)
         {
             string[] data = input.Split();
-            string command = data[0];
-            command = command.ToLower();
+            string commandName = data[0].ToLower();
 
             try
             {
-                this.ParseCommand(input, command, data);
+                Command command = this.ParseCommand(input, commandName, data);
+                command.Execute();
             }
-            catch (DirectoryNotFoundException dnfe)
+            catch (Exception ex)
             {
-                OutputWriter.DisplayException(dnfe.Message);
-            }
-            catch (ArgumentOutOfRangeException aoore)
-            {
-                OutputWriter.DisplayException(aoore.Message);
-            }
-            catch (ArgumentException ae)
-            {
-                OutputWriter.DisplayException(ae.Message);
-            }
-            catch (Exception e)
-            {
-                OutputWriter.DisplayException(e.Message);
+                OutputWriter.DisplayException(ex.Message);
             }
         }
 
-        private void ParseCommand(string input, string command, string[] data)
+        private Command ParseCommand(string input, string command, string[] data)
         {
             switch (command)
             {
                 case "open":
-                    TryOpenFile(input, data);
-                    break;
+                    return new OpenFileCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "mkdir":
-                    TryCreateDirectory(input, data);
-                    break;
+                    return new MakeDirectoryCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "ls":
-                    TryTraverseFolders(input, data);
-                    break;
+                    return new TraverseFoldersCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "cmp":
-                    TryCompareFiles(input, data);
-                    break;
+                    return new CompareFilesCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "cdRel":
-                    TryChangePathRelatively(input, data);
-                    break;
+                    return new ChangeRelativePathCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "cdAbs":
-                    TryChangePathAbsolute(input, data);
-                    break;
+                    return new ChangeAbsolutePathCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "readDb":
-                    TryReadDatabaseFromFile(input, data);
-                    break;
+                    return new ReadDatabaseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "help":
-                    TryGetHelp(input, data);
-                    break;
+                    return new GetHelpCommand(input, data, this.judge, this.repository, this.inputOutputManager);
+                case "show":
+                    return new ShowCourseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "filter":
-                    TryFilterAndTake(input, data);
-                    break;
+                    return new PrintFilteredStudentsCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "order":
-                    TryOrderAndTake(input, data);
-                    break;
+                    return new PrintOrderedStudentsCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "dropdb":
-                    TryDropDb(input, data);
-                    break;
+                    return new DropDatabaseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "decOrder":
                     break;
                 case "download":
                     break;
                 case "downloadAsynch":
                     break;
-                case "show":
-                    TryShowWantedData(input, data);
-                    break;
                 default:
-                    DisplayInvalidCommandMessage(input);
-                    break;
+                    throw new InvalidCommandException(input);
             }
         }
 
