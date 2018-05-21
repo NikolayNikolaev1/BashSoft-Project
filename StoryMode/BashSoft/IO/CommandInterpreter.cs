@@ -61,32 +61,15 @@ namespace BashSoft
                     return new PrintOrderedStudentsCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "dropdb":
                     return new DropDatabaseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "decOrder":
-                    break;
-                case "download":
-                    break;
-                case "downloadAsynch":
-                    break;
+                //case "decOrder":
+                //    break;
+                //case "download":
+                //    break;
+                //case "downloadAsynch":
+                //    break;
                 default:
                     throw new InvalidCommandException(input);
             }
-        }
-
-        private void TryDropDb(string input, string[] data)
-        {
-            if (data.Length != 1)
-            {
-                this.DisplayInvalidCommandMessage(input);
-                return;
-            }
-
-            this.repository.UnloadData();
-            OutputWriter.WriteMessageOnNewLine("Database dropped!");
-        }
-
-        private void DisplayInvalidCommandMessage(string input)
-        {
-            OutputWriter.WriteMessageOnNewLine($"The command {input} is invalid!");
         }
     }
 }
