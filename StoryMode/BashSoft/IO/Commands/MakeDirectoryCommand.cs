@@ -1,11 +1,10 @@
 ﻿using BashSoft.Exceptions;
-using System.Diagnostics;
 
 namespace BashSoft.IO.Commands
 {
-    public class OpenFileCommand : Command
+    public class MakeDirectoryCommand : Command
     {
-        public OpenFileCommand(
+        public MakeDirectoryCommand(
             string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) 
             : base(input, data, judge, repository, inputOutputManager)
         {
@@ -18,8 +17,8 @@ namespace BashSoft.IO.Commands
                 throw new InvalidCommandException(this.Inpput);
             }
 
-            string filename = this.Data[1];
-            Process.Start(SessionData.currentPath + "\\" + filename);
+            string folderName = this.Data[1];
+            this.InputOutputManager.CreateDirectoryInCurrentFolder(folderName);
         }
     }
 }

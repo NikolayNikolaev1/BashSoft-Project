@@ -276,32 +276,6 @@ namespace BashSoft
             }
         }
 
-        private void TryCreateDirectory(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                string folderName = data[1];
-                this.inputOutputManager.CreateDirectoryInCurrentFolder(folderName);
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
-        private void TryOpenFile(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                string filename = data[1];
-                Process.Start(SessionData.currentPath + "\\" + filename);
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
         private void TryDropDb(string input, string[] data)
         {
             if (data.Length != 1)
