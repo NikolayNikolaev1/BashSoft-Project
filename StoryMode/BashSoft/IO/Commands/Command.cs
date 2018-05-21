@@ -13,14 +13,14 @@ namespace BashSoft.IO.Commands
 
         public Command(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
         {
-            this.Inpput = input;
+            this.Input = input;
             this.Data = data;
             this.judge = judge;
             this.repository = repository;
             this.inputOutputManager = inputOutputManager;
         }
 
-        public string Inpput
+        public string Input
         {
             get
             {

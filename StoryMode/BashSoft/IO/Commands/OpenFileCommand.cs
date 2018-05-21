@@ -15,7 +15,7 @@ namespace BashSoft.IO.Commands
         {
             if (this.Data.Length != 2)
             {
-                throw new InvalidCommandException(this.Inpput);
+                throw new InvalidCommandException(this.Input);
             }
 
             string filename = this.Data[1];
