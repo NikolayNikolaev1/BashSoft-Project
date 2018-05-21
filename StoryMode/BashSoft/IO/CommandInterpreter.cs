@@ -1,8 +1,6 @@
 ﻿using BashSoft.Exceptions;
 using BashSoft.IO.Commands;
 using System;
-using System.Diagnostics;
-using System.IO;
 
 namespace BashSoft
 {
@@ -192,19 +190,6 @@ namespace BashSoft
                 string databasePath = data[1];
                 this.repository.LoadData(databasePath);
 
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
-        private void TryChangePathRelatively(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                string relativePath = data[1];
-                this.inputOutputManager.ChangeCurrentDirectoryRelative(relativePath);
             }
             else
             {
