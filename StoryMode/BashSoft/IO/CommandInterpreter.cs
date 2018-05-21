@@ -183,20 +183,6 @@ namespace BashSoft
             return;
         }
 
-        private void TryReadDatabaseFromFile(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                string databasePath = data[1];
-                this.repository.LoadData(databasePath);
-
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
         private void TryDropDb(string input, string[] data)
         {
             if (data.Length != 1)
