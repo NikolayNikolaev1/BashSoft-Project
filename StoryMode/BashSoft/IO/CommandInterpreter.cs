@@ -197,19 +197,6 @@ namespace BashSoft
             }
         }
 
-        private void TryChangePathAbsolute(string input, string[] data)
-        {
-            if (data.Length == 2)
-            {
-                string absolutePath = data[1];
-                this.inputOutputManager.ChangeCurrentDirectoryAbsolute(absolutePath);
-            }
-            else
-            {
-                this.DisplayInvalidCommandMessage(input);
-            }
-        }
-
         private void TryDropDb(string input, string[] data)
         {
             if (data.Length != 1)
