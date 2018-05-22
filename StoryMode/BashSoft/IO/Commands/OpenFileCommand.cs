@@ -1,4 +1,5 @@
-﻿using BashSoft.Exceptions;
+﻿using BashSoft.Contracts;
+using BashSoft.Exceptions;
 using System.Diagnostics;
 
 namespace BashSoft.IO.Commands
@@ -6,7 +7,7 @@ namespace BashSoft.IO.Commands
     public class OpenFileCommand : Command
     {
         public OpenFileCommand(
-            string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) 
+            string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) 
             : base(input, data, judge, repository, inputOutputManager)
         {
         }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using BashSoft.Contracts;
 using BashSoft.Exceptions;
 
 namespace BashSoft.IO.Commands
@@ -6,7 +6,7 @@ namespace BashSoft.IO.Commands
     public class PrintOrderedStudentsCommand : Command
     {
         public PrintOrderedStudentsCommand(
-            string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) 
+            string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) 
             : base(input, data, judge, repository, inputOutputManager)
         {
         }

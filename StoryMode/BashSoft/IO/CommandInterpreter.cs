@@ -1,30 +1,31 @@
-﻿using BashSoft.Exceptions;
+﻿using BashSoft.Contracts;
+using BashSoft.Exceptions;
 using BashSoft.IO.Commands;
 using System;
 
 namespace BashSoft
 {
-    public class CommandInterpreter
+    public class CommandInterpreter : IInterpreter
     {
         private Tester judge;
         private StudentsRepository repository;
-        private IOManager inputOutputManager;
+        private IDirectoryManager inputOutputManager;
 
-        public CommandInterpreter(Tester judge, StudentsRepository repository, IOManager inputOutputManager)
+        public CommandInterpreter(Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
         {
             this.judge = judge;
             this.repository = repository;
             this.inputOutputManager = inputOutputManager;
         }
 
-        public void InterpredCommand(string input)
+        public void InterpretCommand(string input)
         {
             string[] data = input.Split();
             string commandName = data[0].ToLower();
 
             try
             {
-                Command command = this.ParseCommand(input, commandName, data);
+                IExecutable command = this.ParseCommand(input, commandName, data);
                 command.Execute();
             }
             catch (Exception ex)
@@ -33,7 +34,7 @@ namespace BashSoft
             }
         }
 
-        private Command ParseCommand(string input, string command, string[] data)
+        private IExecutable ParseCommand(string input, string command, string[] data)
         {
             switch (command)
             {
