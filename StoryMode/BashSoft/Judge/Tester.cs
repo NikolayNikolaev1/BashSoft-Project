@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BashSoft.Contracts;
+using System;
 using System.IO;
 
 namespace BashSoft
 {
-    public class Tester
+    public class Tester : IContentComparer
     {
         public void CompareContent(string userOutputPath, string expectedOutputPath)
         {

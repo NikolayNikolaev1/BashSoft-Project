@@ -8,11 +8,11 @@ namespace BashSoft.IO.Commands
     {
         private string input;
         private string[] data;
-        private Tester judge;
-        private StudentsRepository repository;
+        private IContentComparer judge;
+        private IDatabase repository;
         private IDirectoryManager inputOutputManager;
 
-        public Command(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
+        public Command(string input, string[] data, IContentComparer judge, IDatabase repository, IDirectoryManager inputOutputManager)
         {
             this.Input = input;
             this.Data = data;
@@ -55,7 +55,7 @@ namespace BashSoft.IO.Commands
             }
         }
 
-        public Tester Judge
+        public IContentComparer Judge
         {
             get
             {
@@ -63,7 +63,7 @@ namespace BashSoft.IO.Commands
             }
         }
 
-        public StudentsRepository Repository
+        public IDatabase Repository
         {
             get
             {

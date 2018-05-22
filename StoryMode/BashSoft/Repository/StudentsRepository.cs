@@ -8,15 +8,15 @@ using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
-    public class StudentsRepository
+    public class StudentsRepository : IDatabase
     {
         public bool isDataInitialized = false;
         private Dictionary<string, ICourse> courses;
         private Dictionary<string, IStudent> students;
-        private RepositoryFilter filter;
-        private RepositorySorter sorter;
+        private IDataFilter filter;
+        private IDataSorter sorter;
 
-        public StudentsRepository(RepositoryFilter filter, RepositorySorter sorter)
+        public StudentsRepository(IDataFilter filter, IDataSorter sorter)
         {
             this.filter = filter;
             this.sorter = sorter;

@@ -6,7 +6,7 @@ namespace BashSoft.IO.Commands
     public class ReadDatabaseCommand : Command
     {
         public ReadDatabaseCommand(
-            string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) 
+            string input, string[] data, IContentComparer judge, IDatabase repository, IDirectoryManager inputOutputManager) 
             : base(input, data, judge, repository, inputOutputManager)
         {
         }
