@@ -1,4 +1,5 @@
 ﻿using BashSoft.Contracts;
+using BashSoft.DataStructures;
 using BashSoft.Models;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,22 @@ namespace BashSoft
                     this.GetStudentScoresFromCourse(courseName, studentMarksEntry.Key);
                 }
             }
+        }
+
+        public ISimpleOrderedBag<IStudent> GetAllStudentsSorted(IComparer<IStudent> cmp)
+        {
+            SimpleSortedList<IStudent> sortedStudents = new SimpleSortedList<IStudent>(cmp);
+            sortedStudents.AddAll(this.students.Values);
+
+            return sortedStudents;
+        }
+
+        public ISimpleOrderedBag<ICourse> GetAllCourssesSorted(IComparer<ICourse> cmp)
+        {
+            SimpleSortedList<ICourse> sortedCourses = new SimpleSortedList<ICourse>(cmp);
+            sortedCourses.AddAll(this.courses.Values);
+
+            return sortedCourses;
         }
 
         private void ReadData(string fileName)
