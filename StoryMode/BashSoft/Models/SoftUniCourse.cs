@@ -50,5 +50,9 @@ namespace BashSoft.Models
 
             this.studentsByName.Add(student.UserName, student);
         }
+
+        public int CompareTo(ICourse other) => this.Name.CompareTo(other.Name);
+
+        public override string ToString() => this.Name;
     }
 }

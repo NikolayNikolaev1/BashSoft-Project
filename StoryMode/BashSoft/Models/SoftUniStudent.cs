@@ -74,6 +74,10 @@ namespace BashSoft.Models
             this.marksByCourseName.Add(courseName, CalculateMark(scores));
         }
 
+        public int CompareTo(IStudent other) => this.UserName.CompareTo(other.UserName);
+
+        public override string ToString() => this.UserName;
+
         private double CalculateMark(int[] scores)
         {
             double percentageOfSolvedExam = scores.Sum() / (double)(SoftUniCourse.NumberOfTasksOnExam * SoftUniCourse.MaxScoreOnExamTask);
