@@ -111,7 +111,7 @@ namespace BashSoft
             return sortedStudents;
         }
 
-        public ISimpleOrderedBag<ICourse> GetAllCourssesSorted(IComparer<ICourse> cmp)
+        public ISimpleOrderedBag<ICourse> GetAllCoursesSorted(IComparer<ICourse> cmp)
         {
             SimpleSortedList<ICourse> sortedCourses = new SimpleSortedList<ICourse>(cmp);
             sortedCourses.AddAll(this.courses.Values);
