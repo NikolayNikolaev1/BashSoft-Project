@@ -1,10 +1,10 @@
-﻿using BashSoft.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using Contracts;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class RepositorySorter : IDataSorter
     {
         public void OrderAndTake(Dictionary<string, double> studentsMarks, string comparison, int studentsToTake)

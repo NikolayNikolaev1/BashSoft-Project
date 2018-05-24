@@ -1,9 +1,9 @@
-﻿using BashSoft.Attributes;
-using BashSoft.Contracts;
-using BashSoft.Exceptions;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using Attributes;
+    using Contracts;
+    using Exceptions;
+
     [Alias("order")]
     public class PrintOrderedStudentsCommand : Command
     {

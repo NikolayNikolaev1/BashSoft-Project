@@ -1,11 +1,11 @@
-﻿using BashSoft.Attributes;
-using BashSoft.Contracts;
-using BashSoft.Exceptions;
-using System;
-using System.Collections.Generic;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using Attributes;
+    using Contracts;
+    using Exceptions;
+    using System;
+    using System.Collections.Generic;
+
     [Alias("display")]
     public class DisplayCommand : Command
     {

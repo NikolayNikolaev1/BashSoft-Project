@@ -1,8 +1,8 @@
-﻿using BashSoft.Attributes;
-using BashSoft.Exceptions;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using Attributes;
+    using Exceptions;
+
     [Alias("help")]
     public class GetHelpCommand : Command
     {

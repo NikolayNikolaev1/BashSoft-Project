@@ -1,11 +1,11 @@
-﻿using BashSoft.Contracts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BashSoft.DataStructures
+﻿namespace BashSoft.DataStructures
 {
+    using Contracts;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class SimpleSortedList<T> : ISimpleOrderedBag<T> where T : IComparable<T>
     {
         private const int DefaultSize = 16;

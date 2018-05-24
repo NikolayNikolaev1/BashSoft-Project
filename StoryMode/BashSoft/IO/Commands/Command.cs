@@ -1,9 +1,9 @@
-﻿using BashSoft.Contracts;
-using BashSoft.Exceptions;
-using System;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using Contracts;
+    using Exceptions;
+    using System;
+
     public abstract class Command : IExecutable
     {
         private string input;

@@ -1,8 +1,8 @@
-﻿using BashSoft.Contracts;
-using System;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using Contracts;
+    using System;
+
     public class InputReader : IReader
     {
         private const string endCommand = "quit";

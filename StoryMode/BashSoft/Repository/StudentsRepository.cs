@@ -1,14 +1,14 @@
-﻿using BashSoft.Contracts;
-using BashSoft.DataStructures;
-using BashSoft.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using Contracts;
+    using DataStructures;
+    using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
     public class StudentsRepository : IDatabase
     {
         public bool isDataInitialized = false;

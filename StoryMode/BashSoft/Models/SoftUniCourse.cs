@@ -1,9 +1,9 @@
-﻿using BashSoft.Contracts;
-using BashSoft.Exceptions;
-using System.Collections.Generic;
-
-namespace BashSoft.Models
+﻿namespace BashSoft.Models
 {
+    using Contracts;
+    using Exceptions;
+    using System.Collections.Generic;
+
     public class SoftUniCourse : ICourse
     {
         public const int NumberOfTasksOnExam = 5;

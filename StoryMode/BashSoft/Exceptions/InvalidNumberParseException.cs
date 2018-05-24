@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BashSoft.Exceptions
+﻿namespace BashSoft.Exceptions
 {
+    using System;
+
     public class InvalidNumberParseException : Exception
     {
         public const string UnableToParseNumber = "The sequence you've written is not a valid number.";

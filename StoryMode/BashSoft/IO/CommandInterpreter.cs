@@ -1,12 +1,12 @@
-﻿using BashSoft.Attributes;
-using BashSoft.Contracts;
-using BashSoft.IO.Commands;
-using System;
-using System.Linq;
-using System.Reflection;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using Attributes;
+    using Contracts;
+    using IO.Commands;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
     public class CommandInterpreter : IInterpreter
     {
         private IContentComparer judge;

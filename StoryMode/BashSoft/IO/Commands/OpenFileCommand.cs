@@ -1,9 +1,9 @@
-﻿using BashSoft.Attributes;
-using BashSoft.Exceptions;
-using System.Diagnostics;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using Attributes;
+    using Exceptions;
+    using System.Diagnostics;
+
     [Alias("open")]
     public class OpenFileCommand : Command
     {
