@@ -1,15 +1,18 @@
-﻿using BashSoft.Contracts;
+﻿using BashSoft.Attributes;
+using BashSoft.Contracts;
 using BashSoft.Exceptions;
 
 namespace BashSoft.IO.Commands
 {
+    [Alias("filter")]
     public class PrintFilteredStudentsCommand : Command
     {
+        [Inject]
+        private IDatabase repository;
+
         public PrintFilteredStudentsCommand(
-            string input, string[] data, IContentComparer judge, IDatabase repository, IDirectoryManager inputOutputManager) 
-            : base(input, data, judge, repository, inputOutputManager)
-        {
-        }
+            string input, string[] data) 
+            : base(input, data) { }
 
         public override void Execute()
         {
@@ -32,7 +35,7 @@ namespace BashSoft.IO.Commands
             {
                 if (takeQuantity == "all")
                 {
-                    this.Repository.FilterAndTake(courseName, filter, null);
+                    this.repository.FilterAndTake(courseName, filter, null);
                 }
                 else
                 {
@@ -40,7 +43,7 @@ namespace BashSoft.IO.Commands
                     bool hasParsed = int.TryParse(takeQuantity, out studentsToTake);
                     if (hasParsed)
                     {
-                        this.Repository.FilterAndTake(courseName, filter, studentsToTake);
+                        this.repository.FilterAndTake(courseName, filter, studentsToTake);
                     }
                     else
                     {

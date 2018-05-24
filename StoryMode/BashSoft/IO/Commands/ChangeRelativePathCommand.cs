@@ -10,11 +10,8 @@ namespace BashSoft.IO.Commands
         [Inject]
         private IDirectoryManager inputOutputManager;
 
-        public ChangeRelativePathCommand(
-            string input, string[] data) 
-            : base(input, data)
-        {
-        }
+        public ChangeRelativePathCommand(string input, string[] data) 
+            : base(input, data) { }
 
         public override void Execute()
         {
