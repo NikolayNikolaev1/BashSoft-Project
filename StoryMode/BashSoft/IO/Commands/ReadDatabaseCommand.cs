@@ -4,7 +4,7 @@
     using Contracts;
     using Exceptions;
 
-    [Alias("order")]
+    [Alias("readDb")]
     public class ReadDatabaseCommand : Command
     {
         [Inject]

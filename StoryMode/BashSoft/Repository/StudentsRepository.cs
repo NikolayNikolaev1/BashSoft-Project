@@ -65,6 +65,7 @@
 
             this.students = new Dictionary<string, IStudent>();
             this.courses = new Dictionary<string, ICourse>();
+            OutputWriter.WriteMessageOnNewLine("Reading data...");
             this.ReadData(fileName);
         }
 
@@ -124,20 +125,20 @@
             string path = SessionData.currentPath + "\\" + fileName;
             if (File.Exists(path))
             {
-                Regex rgx = new Regex(@"([A-Z][a-zA-Z#\++]*_[A-Z][a-z]{2}_\d{4})\s+([A-Za-z]+\d{2}_\d{2,4})\s([\s0-9]+)");
-                string[] allInputLines = File.ReadAllLines(path);
-                for (int line = 0; line < allInputLines.Length; line++)
+                var rgx = new Regex(@"([A-Z][a-zA-Z#\++]*_[A-Z][a-z]{2}_\d{4})\s+([A-Za-z]+\d{2}_\d{2,4})\s([\s0-9]+)");
+                var allInputLines = File.ReadAllLines(path);
+                for (int i = 0; i < allInputLines.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(allInputLines[line]) && rgx.IsMatch(allInputLines[line]))
+                    if (!string.IsNullOrEmpty(allInputLines[i]) && rgx.IsMatch(allInputLines[i]))
                     {
-                        Match currentMatch = rgx.Match(allInputLines[line]);
+                        Match currentMatch = rgx.Match(allInputLines[i]);
                         string courseName = currentMatch.Groups[1].Value;
                         string username = currentMatch.Groups[2].Value;
-                        string scoreString = currentMatch.Groups[3].Value;
+                        string scoreStr = currentMatch.Groups[3].Value;
 
                         try
                         {
-                            int[] scores = scoreString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                            int[] scores = scoreStr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
                                 .Select(int.Parse)
                                 .ToArray();
 
@@ -168,12 +169,12 @@
 
                             student.EnrollInCourse(course);
                             student.SetMarkOnCourse(courseName, scores);
-
                             course.EnrollStudent(student);
+
                         }
                         catch (FormatException fex)
                         {
-                            OutputWriter.DisplayException(fex.Message + $"at line : {line}");
+                            OutputWriter.DisplayException(fex.Message + $"at line : {i}");
                         }
                     }
                 }
