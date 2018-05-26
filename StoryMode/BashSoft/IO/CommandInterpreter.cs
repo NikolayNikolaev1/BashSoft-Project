@@ -23,7 +23,7 @@
         public void InterpretCommand(string input)
         {
             string[] data = input.Split();
-            string commandName = data[0].ToLower();
+            string commandName = data[0];
 
             try
             {
