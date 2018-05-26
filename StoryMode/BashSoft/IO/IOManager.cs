@@ -80,9 +80,9 @@
             }
             else
             {
-                string currentPath = SessionData.currentPath;
-                currentPath += "\\" + relativePath;
-                ChangeCurrentDirectoryRelative(currentPath);
+                string currenPath = SessionData.currentPath;
+                currenPath += "\\" + relativePath;
+                SessionData.currentPath = currenPath;
             }
         }
 
