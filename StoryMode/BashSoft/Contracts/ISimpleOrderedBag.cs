@@ -7,10 +7,14 @@
     {
         int Size { get; }
 
+        int Capacity { get; }
+
         void Add(T element);
 
         void AddAll(ICollection<T> collection);
 
         string JoinWith(string joiner);
+
+        bool Remove(T element);
     }
 }

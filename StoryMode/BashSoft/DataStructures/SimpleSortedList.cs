@@ -43,6 +43,14 @@
             }
         }
 
+        public int Capacity
+        {
+            get
+            {
+                return this.innerCollection.Length;
+            }
+        }
+
         public void Add(T elemenet)
         {
             if (this.innerCollection.Length == this.size)
@@ -126,6 +134,34 @@
 
             this.innerCollection = new T[capacity];
         }
-        
+
+        public bool Remove(T element)
+        {
+            bool hasBeenRemoved = false;
+            int indexOfRemovedElement = 0;
+
+            for (int i = 0; i < this.Size; i++)
+            {
+                if (this.innerCollection[i].Equals(element))
+                {
+                    indexOfRemovedElement = i;
+                    this.innerCollection[i] = default(T);
+                    hasBeenRemoved = true;
+                    break;
+                }
+            }
+
+            if (hasBeenRemoved)
+            {
+                for (int i = indexOfRemovedElement; i < this.Size - 1; i++)
+                {
+                    this.innerCollection[i] = this.innerCollection[i + 1];
+                }
+
+                this.innerCollection[this.size - 1] = default(T);
+            }
+
+            return hasBeenRemoved;
+        }
     }
 }
